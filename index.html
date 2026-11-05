@@ -1,0 +1,1174 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Scenario Master Assessment Suite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Inter & JetBrains Mono Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        @media print {
+            header, footer, .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .print-card { border: 1px solid #ccc !important; background: white !important; color: black !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-teal-500 selection:text-slate-950">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('home-screen')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-teal-500/20">
+                    <i class="ph-bold ph-shield-checkered text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">CyberSec Ops Portal</h1>
+                    <p class="text-xs text-slate-400 font-mono">13 Topics &bull; Custom Time &amp; Difficulty</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-2 text-xs font-mono bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-teal-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="header-stats">Loading Question Bank...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+
+        <!-- SCREEN 1: DASHBOARD & EXAM CONFIGURATION -->
+        <section id="home-screen" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-teal-950 border border-slate-800 p-6 sm:p-10 shadow-2xl">
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-4">
+                        <i class="ph-bold ph-terminal-window"></i> Comprehensive Exam Suite
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+                        Cybersecurity Scenario Simulator
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
+                        Test your knowledge across all 13 core cybersecurity domains with Easy, Medium, and Difficult scenarios. Configure custom time limits and question limits below.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Custom Configuration Form -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-4">
+                    <i class="ph-bold ph-sliders-horizontal text-teal-400"></i> Configure Exam Parameters
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 1. Topic Selection -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase">1. Topic Domain</label>
+                        <select id="filter-topic" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-teal-500 transition">
+                            <option value="ALL">All 13 Topics (Comprehensive)</option>
+                            <option value="Topic 1: Intro to Cyber Security">1. Intro to Cyber Security</option>
+                            <option value="Topic 2: Networks and the Internet">2. Networks &amp; the Internet</option>
+                            <option value="Topic 3: Cyber Threat Landscape">3. Cyber Threat Landscape</option>
+                            <option value="Topic 4: Understanding Security">4. Understanding Security</option>
+                            <option value="Topic 5: Information Security Principles (CIA)">5. InfoSec Principles (CIA Triad)</option>
+                            <option value="Topic 6: Information Security Terminology">6. InfoSec Terminology</option>
+                            <option value="Topic 7: Who are the Attackers">7. Who are the Attackers</option>
+                            <option value="Topic 8: Advanced Persistent Threat (APT)">8. Advanced Persistent Threat (APT)</option>
+                            <option value="Topic 9: Malware & Types of Malware">9. Malware &amp; Types of Malware</option>
+                            <option value="Topic 10: Attacks Using Malware">10. Attacks Using Malware</option>
+                            <option value="Topic 11: Malware Attack Lifecycle">11. Malware Attack Lifecycle</option>
+                            <option value="Topic 12: Social Engineering Attacks">12. Social Engineering Attacks</option>
+                            <option value="Topic 13: Anonymity and Privacy">13. Anonymity &amp; Privacy</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Difficulty Tier -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase">2. Difficulty Tier</label>
+                        <select id="filter-difficulty" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-teal-500 transition">
+                            <option value="ALL">All Levels (Easy, Medium, Difficult)</option>
+                            <option value="Easy">Easy Level</option>
+                            <option value="Medium">Medium Level</option>
+                            <option value="Difficult">Difficult Level</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. Question Count -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase">3. Number of Questions</label>
+                        <select id="filter-count" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-teal-500 transition">
+                            <option value="5">5 Questions (Quick Check)</option>
+                            <option value="10" selected>10 Questions (Standard Quiz)</option>
+                            <option value="20">20 Questions (Extended Exam)</option>
+                            <option value="30">30 Questions (Full Module)</option>
+                        </select>
+                    </div>
+
+                    <!-- 4. Timer Option -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase">4. Exam Timer Limit</label>
+                        <select id="filter-timer" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-teal-500 transition">
+                            <option value="0">No Time Limit (Practice Mode)</option>
+                            <option value="300">5 Minutes (Timed)</option>
+                            <option value="600" selected>10 Minutes (Standard)</option>
+                            <option value="900">15 Minutes (Strict)</option>
+                            <option value="1800">30 Minutes (Exam)</option>
+                            <option value="3600">60 Minutes (Marathon)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex justify-end">
+                    <button onclick="startConfiguredExam()" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold transition shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-lightning text-lg"></i> Launch Configured Exam
+                    </button>
+                </div>
+            </div>
+
+            <!-- 13 Topic Syllabus Cards Grid -->
+            <div class="space-y-4">
+                <h4 class="font-bold text-lg text-white flex items-center gap-2">
+                    <i class="ph-bold ph-books text-teal-400"></i> Course Topics Covered (13 Core Modules)
+                </h4>
+                <div id="topics-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Cards auto-rendered by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: ACTIVE QUIZ TEST INTERFACE -->
+        <section id="quiz-screen" class="hidden space-y-6">
+            <!-- Progress & Header Stats -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <button onclick="confirmExit()" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition" title="Exit Test">
+                        <i class="ph-bold ph-arrow-left text-lg"></i>
+                    </button>
+                    <div>
+                        <span id="quiz-topic-badge" class="text-xs font-mono text-teal-400 font-semibold uppercase tracking-wider block">Topic Name</span>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-white text-base sm:text-lg" id="quiz-progress-text">Question 1 of 10</h3>
+                            <span id="quiz-difficulty-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold">Easy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer & Clock -->
+                <div class="flex items-center gap-3">
+                    <div id="timer-box" class="flex items-center gap-2 font-mono bg-slate-950 px-4 py-2 rounded-xl border border-slate-800 text-slate-200 text-sm font-bold">
+                        <i class="ph-bold ph-clock text-teal-400 text-lg" id="timer-icon"></i>
+                        <span id="timer-display">--:--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar Line -->
+            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
+                <div id="progress-bar" class="bg-gradient-to-r from-teal-500 to-cyan-500 h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Question & Scenario Box -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl">
+                <div class="bg-slate-950 border-l-4 border-teal-500 rounded-r-xl p-5 space-y-2">
+                    <div class="flex items-center gap-2 text-xs font-mono font-bold text-teal-400 uppercase">
+                        <i class="ph-bold ph-warning-circle text-base"></i> Operational Cyber Scenario
+                    </div>
+                    <p id="scenario-text" class="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+                        Scenario text...
+                    </p>
+                </div>
+
+                <div>
+                    <h4 id="question-text" class="text-lg sm:text-xl font-bold text-white leading-snug">
+                        Question loading...
+                    </h4>
+                </div>
+
+                <div id="options-container" class="space-y-3 pt-2">
+                    <!-- Dynamic Options -->
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center justify-between pt-2">
+                <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="ph-bold ph-caret-left"></i> Previous
+                </button>
+                <button id="next-btn" onclick="navigateQuestion(1)" class="px-7 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold transition flex items-center gap-2 shadow-lg shadow-teal-500/20">
+                    Next Question <i class="ph-bold ph-caret-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: RESULTS & SCORECARD -->
+        <section id="results-screen" class="hidden space-y-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 sm:p-10 text-center space-y-6 shadow-2xl print-card">
+                <div class="inline-flex p-4 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-2 no-print">
+                    <i class="ph-bold ph-trophy text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-white">Assessment Complete!</h2>
+                
+                <div class="flex justify-center items-baseline gap-2">
+                    <span id="final-score-val" class="text-6xl font-black bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">0</span>
+                    <span id="final-total-val" class="text-2xl text-slate-500 font-bold">/ 10</span>
+                </div>
+
+                <p id="score-feedback-text" class="text-slate-300 max-w-lg mx-auto text-base">
+                    Reviewing score parameters...
+                </p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-4 border-t border-slate-800 text-center">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="block text-xs font-mono text-slate-400 uppercase">Accuracy</span>
+                        <span id="metric-accuracy" class="text-xl font-bold text-white">0%</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="block text-xs font-mono text-slate-400 uppercase">Time Used</span>
+                        <span id="metric-time" class="text-xl font-bold text-white">00:00</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="block text-xs font-mono text-slate-400 uppercase">Correct</span>
+                        <span id="metric-correct" class="text-xl font-bold text-emerald-400">0</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="block text-xs font-mono text-slate-400 uppercase">Incorrect</span>
+                        <span id="metric-incorrect" class="text-xl font-bold text-rose-400">0</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 pt-4 no-print">
+                    <button onclick="window.print()" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold transition flex items-center gap-2">
+                        <i class="ph-bold ph-printer"></i> Print / Save PDF Scorecard
+                    </button>
+                    <button onclick="restartCurrentQuiz()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold transition flex items-center gap-2">
+                        <i class="ph-bold ph-arrow-counter-clockwise"></i> Retake Test
+                    </button>
+                    <button onclick="showScreen('home-screen')" class="px-6 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold transition flex items-center gap-2">
+                        <i class="ph-bold ph-house"></i> Main Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Explanation Review -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="ph-bold ph-list-magnifying-glass text-teal-400"></i> Forensic Question Review
+                    </h3>
+                </div>
+
+                <div id="review-container" class="space-y-6">
+                    <!-- Review cards inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500 font-mono no-print">
+        Cybersecurity Master Assessment Platform &bull; Structured 13-Topic Exam Engine
+    </footer>
+
+    <!-- QUESTION BANK & APP LOGIC -->
+    <script>
+        // Comprehensive Question Database mapped explicitly across all 13 syllabus topics
+        const questionBank = [
+            // TOPIC 1: Intro to Cyber Security
+            {
+                topic: "Topic 1: Intro to Cyber Security",
+                difficulty: "Easy",
+                scenario: "A small retail company adopts digital cloud storage for customer records without configuring access controls.",
+                question: "What is the primary objective of cyber security in this context?",
+                options: [
+                    "A) Protect systems, networks, and data from digital attacks and unauthorized access.",
+                    "B) Increase hardware processing speeds.",
+                    "C) Eliminate the need for internet connectivity.",
+                    "D) Replace human staff with automated scripts."
+                ],
+                correct: 0,
+                explanation: "Cyber security focuses on protecting digital assets, networks, and data from unauthorized access or malicious harm."
+            },
+            {
+                topic: "Topic 1: Intro to Cyber Security",
+                difficulty: "Medium",
+                scenario: "A fintech firm conducts a risk analysis comparing potential financial loss against the cost of security software deployment.",
+                question: "Why is cybersecurity considered a continuous operational process rather than a one-time setup?",
+                options: [
+                    "A) Software license keys expire every 24 hours.",
+                    "B) Threat actors continuously develop new vectors, and system environments constantly evolve.",
+                    "C) Hardware components degrade physically every week.",
+                    "D) Regulations require rewriting all code monthly."
+                ],
+                correct: 1,
+                explanation: "Cybersecurity is dynamic because vulnerabilities, technology stacks, and threat actor tactics change continuously."
+            },
+            {
+                topic: "Topic 1: Intro to Cyber Security",
+                difficulty: "Difficult",
+                scenario: "An enterprise adopts a Zero Trust Architecture (ZTA) policy for internal networks.",
+                question: "Which core principle best summarizes Zero Trust in modern cybersecurity?",
+                options: [
+                    "A) Trust all users inside the internal office network automatically.",
+                    "B) Never trust, always verify every access request regardless of origin.",
+                    "C) Rely strictly on perimeter firewalls while ignoring internal host monitoring.",
+                    "D) Disable encryption for internal server communications."
+                ],
+                correct: 1,
+                explanation: "Zero Trust assumes threats exist both outside and inside the network, enforcing continuous authentication and verification."
+            },
+
+            // TOPIC 2: Networks and the Internet
+            {
+                topic: "Topic 2: Networks and the Internet",
+                difficulty: "Easy",
+                scenario: "An employee connects to a coffee shop's unencrypted public Wi-Fi network without a VPN.",
+                question: "What risk does the employee face on an open network?",
+                options: [
+                    "A) Automatic physical damage to their laptop battery.",
+                    "B) Unencrypted network traffic can be eavesdropped on via packet sniffing.",
+                    "C) Total loss of device screen resolution.",
+                    "D) Immediate hardware motherboard shorting."
+                ],
+                correct: 1,
+                explanation: "Unencrypted Wi-Fi allows attackers on the same network to capture unencrypted data packets using tools like Wireshark."
+            },
+            {
+                topic: "Topic 2: Networks and the Internet",
+                difficulty: "Medium",
+                scenario: "A system admin notices anomalous DNS queries requesting root domain zone transfers from an external IP.",
+                question: "Which protocol vulnerability is being targeted in DNS infrastructure?",
+                options: [
+                    "A) Plaintext DNS queries can be spoofed or intercepted if DNSSEC is missing.",
+                    "B) HTTP port 80 routing errors.",
+                    "C) ICMP ping request buffer overflows.",
+                    "D) FTP anonymous upload vulnerabilities."
+                ],
+                correct: 0,
+                explanation: "Traditional DNS lacks inherent validation. DNSSEC adds cryptographic signatures to prevent DNS spoofing and cache poisoning."
+            },
+            {
+                topic: "Topic 2: Networks and the Internet",
+                difficulty: "Difficult",
+                scenario: "An enterprise network experiences a SYN Flood attack targeting its perimeter web server.",
+                question: "At which layer of the OSI model does a TCP SYN Flood operate, and how does it exhaust server resources?",
+                options: [
+                    "A) Layer 7; by sending excessive HTTP GET requests.",
+                    "B) Layer 4 (Transport Layer); by exhausting half-open TCP connection table slots.",
+                    "C) Layer 2 (Data Link); by corrupting MAC addresses.",
+                    "D) Layer 1 (Physical); by severing fiber optic cables."
+                ],
+                correct: 1,
+                explanation: "SYN Floods exploit the TCP 3-way handshake at Layer 4 by leaving connection requests in a SYN-RECEIVED state until memory pool queues are exhausted."
+            },
+
+            // TOPIC 3: Cyber Threat Landscape
+            {
+                topic: "Topic 3: Cyber Threat Landscape",
+                difficulty: "Easy",
+                scenario: "A news outlet reports a sharp rise in ransomware attacks against municipal hospitals.",
+                question: "What does the term 'Threat Landscape' refer to in cybersecurity?",
+                options: [
+                    "A) The physical satellite map of datacenter locations.",
+                    "B) The overall collection of active threats, vulnerabilities, and attack trends in a given domain.",
+                    "C) The graphics engine used in security monitoring dashboards.",
+                    "D) The cost of purchasing antivirus software licenses."
+                ],
+                correct: 1,
+                explanation: "The threat landscape encompasses all current threat vectors, active threat actor groups, trends, and systemic vulnerabilities."
+            },
+            {
+                topic: "Topic 3: Cyber Threat Landscape",
+                difficulty: "Medium",
+                scenario: "A company expands to remote work, issuing laptops to 500 employees.",
+                question: "How does remote work shift the organization's threat landscape?",
+                options: [
+                    "A) It shrinks the attack surface by eliminating physical office space.",
+                    "B) It expands the attack surface by increasing edge endpoints and remote network access points.",
+                    "C) It completely eliminates social engineering risks.",
+                    "D) It renders perimeter firewalls 100% effective."
+                ],
+                correct: 1,
+                explanation: "Distributed remote endpoints expand the network attack perimeter beyond traditional corporate office firewalls."
+            },
+            {
+                topic: "Topic 3: Cyber Threat Landscape",
+                difficulty: "Difficult",
+                scenario: "Attackers breach a popular software library dependency (NPM package) used by thousands of web applications.",
+                question: "What growing trend in the cyber threat landscape is demonstrated here?",
+                options: [
+                    "A) Direct brute-force modem hijacking.",
+                    "B) Software Supply Chain Attack.",
+                    "C) Local Physical Shoulder Surfing.",
+                    "D) Physical USB Drop Vector."
+                ],
+                correct: 1,
+                explanation: "Supply chain attacks target upstream third-party vendors or code libraries to compromise downstream consumers simultaneously."
+            },
+
+            // TOPIC 4: Understanding Security
+            {
+                topic: "Topic 4: Understanding Security",
+                difficulty: "Easy",
+                scenario: "An organization installs lockable doors and keycard scanners on server rooms.",
+                question: "What category of security control is being implemented here?",
+                options: [
+                    "A) Physical Security Control",
+                    "B) Cryptographic Application Control",
+                    "C) Logical Network Boundary Control",
+                    "D) Administrative Policy Control"
+                ],
+                correct: 0,
+                explanation: "Physical controls protect hardware, facilities, and physical access points from unauthorized entry."
+            },
+            {
+                topic: "Topic 4: Understanding Security",
+                difficulty: "Medium",
+                scenario: "A security analyst configures automated alerts for multiple failed login attempts on admin accounts.",
+                question: "What function does this control perform in a defense-in-depth model?",
+                options: [
+                    "A) Preventive Control",
+                    "B) Detective Control",
+                    "C) Corrective Control",
+                    "D) Compensating Control"
+                ],
+                correct: 1,
+                explanation: "Detective controls identify and alert on suspicious activity or unauthorized events as they occur."
+            },
+            {
+                topic: "Topic 4: Understanding Security",
+                difficulty: "Difficult",
+                scenario: "A bank implements strict separation of duties, requiring two administrators to authorize wire transfers over $1,000,000.",
+                question: "What fundamental security control model prevents single-point insider fraud?",
+                options: [
+                    "A) Least Privilege and Dual Custody / Split Knowledge",
+                    "B) Discretionary Access Control (DAC)",
+                    "C) Perimeter IP Filtering",
+                    "D) Security through Obscurity"
+                ],
+                correct: 0,
+                explanation: "Dual custody and least privilege ensure no single individual possesses sufficient authorization to execute critical fraud single-handedly."
+            },
+
+            // TOPIC 5: InfoSec Principles (CIA)
+            {
+                topic: "Topic 5: Information Security Principles (CIA)",
+                difficulty: "Easy",
+                scenario: "A hospital's server goes offline due to a power outage, blocking access to critical patient files during surgery.",
+                question: "Which component of the CIA Triad is compromised?",
+                options: [
+                    "A) Confidentiality",
+                    "B) Integrity",
+                    "C) Availability",
+                    "D) Non-repudiation"
+                ],
+                correct: 2,
+                explanation: "Availability ensures that systems and data are operational and accessible when authorized users need them."
+            },
+            {
+                topic: "Topic 5: Information Security Principles (CIA)",
+                difficulty: "Medium",
+                scenario: "An attacker intercepts an unencrypted wire transfer payload and modifies the recipient routing account number.",
+                question: "Which principle of the CIA Triad was directly violated?",
+                options: [
+                    "A) Confidentiality",
+                    "B) Integrity",
+                    "C) Availability",
+                    "D) Authenticity"
+                ],
+                correct: 1,
+                explanation: "Integrity ensures data remains authentic, accurate, and protected against unauthorized modification or tampering."
+            },
+            {
+                topic: "Topic 5: Information Security Principles (CIA)",
+                difficulty: "Difficult",
+                scenario: "A database uses cryptographic hashing (SHA-256) combined with digital signatures for stored records.",
+                question: "How do cryptographic hashes support the principle of Integrity?",
+                options: [
+                    "A) They compress files to save disk space.",
+                    "B) Any change to data produces a completely different hash value, making modification immediately detectable.",
+                    "C) They prevent authorized users from reading the data.",
+                    "D) They speed up network transport protocols."
+                ],
+                correct: 1,
+                explanation: "Cryptographic hash functions are deterministic and one-way; any modification to the source data yields a distinct hash, revealing tampering."
+            },
+
+            // TOPIC 6: Information Security Terminology
+            {
+                topic: "Topic 6: Information Security Terminology",
+                difficulty: "Easy",
+                scenario: "A web application contains an unpatched flaw in its login script.",
+                question: "In security terminology, what is this flaw called?",
+                options: [
+                    "A) Threat",
+                    "B) Vulnerability",
+                    "C) Risk",
+                    "D) Exploit"
+                ],
+                correct: 1,
+                explanation: "A vulnerability is a weakness or flaw in software, hardware, or procedures that can be exploited by a threat."
+            },
+            {
+                topic: "Topic 6: Information Security Terminology",
+                difficulty: "Medium",
+                scenario: "A hacker publishes a custom script on GitHub that automates taking control of unpatched firewalls.",
+                question: "In security terminology, what is this script called?",
+                options: [
+                    "A) Vulnerability",
+                    "B) Exploit",
+                    "C) Asset",
+                    "D) Exposure"
+                ],
+                correct: 1,
+                explanation: "An exploit is a piece of software, code, or technique that takes advantage of a specific vulnerability to compromise a system."
+            },
+            {
+                topic: "Topic 6: Information Security Terminology",
+                difficulty: "Difficult",
+                scenario: "Risk assessment team evaluates: Risk = Threat x Vulnerability x Impact.",
+                question: "What is the difference between a Threat and a Risk?",
+                options: [
+                    "A) They are identical terms.",
+                    "B) A Threat is a potential danger; Risk is the calculated likelihood and impact of that threat exploiting a vulnerability.",
+                    "C) Risk is the code used to attack; Threat is the patch.",
+                    "D) Threat applies only to hardware; Risk applies only to software."
+                ],
+                correct: 1,
+                explanation: "A threat is an actor or event capable of causing harm. Risk quantifies the probability and business impact of that threat succeeding."
+            },
+
+            // TOPIC 7: Who are the Attackers
+            {
+                topic: "Topic 7: Who are the Attackers",
+                difficulty: "Easy",
+                scenario: "An individual downloads a pre-made port scanner tool off the web to disrupt a classmate's gaming server without understanding how the underlying script functions.",
+                question: "What term describes this type of attacker?",
+                options: [
+                    "A) Advanced Persistent Threat (APT)",
+                    "B) Script Kiddie",
+                    "C) Nation-State Operative",
+                    "D) Insiders with Admin Privileges"
+                ],
+                correct: 1,
+                explanation: "Script Kiddies are low-skilled individuals who use existing automated scripts or tools created by others without deep technical knowledge."
+            },
+            {
+                topic: "Topic 7: Who are the Attackers",
+                difficulty: "Medium",
+                scenario: "A disgruntled former IT employee whose user credentials were not revoked upon termination accesses customer databases.",
+                question: "What category of threat actor does this represent?",
+                options: [
+                    "A) Hacktivist",
+                    "B) Malicious Insider",
+                    "C) Cyber Mercenary",
+                    "D) Script Kiddie"
+                ],
+                correct: 1,
+                explanation: "Insiders (current or former employees/contractors) possess internal system knowledge and access rights, making them potent threats."
+            },
+            {
+                topic: "Topic 7: Who are the Attackers",
+                difficulty: "Difficult",
+                scenario: "An attacker breaches critical infrastructure networks to disrupt electrical power grids during diplomatic tensions between countries.",
+                question: "What type of threat actor group typically carries out such operations?",
+                options: [
+                    "A) Nation-State Cyber Warfare Actors",
+                    "B) Opportunistic Spammers",
+                    "C) Bug Bounty Researchers",
+                    "D) Hacktivists seeking ad revenue"
+                ],
+                correct: 0,
+                explanation: "Nation-state threat actors are well-funded groups conducting geopolitical espionage, strategic sabotage, or cyber warfare."
+            },
+
+            // TOPIC 8: Advanced Persistent Threat (APT)
+            {
+                topic: "Topic 8: Advanced Persistent Threat (APT)",
+                difficulty: "Easy",
+                scenario: "A defense contractor notices covert network traffic quietly sending data outside the network over a 12-month period.",
+                question: "What key characteristic distinguishes an APT from a typical malware attack?",
+                options: [
+                    "A) APTs always lock screens immediately and demand Bitcoin.",
+                    "B) APTs maintain long-term stealthy access to high-value targets.",
+                    "C) APTs only target home mobile phones.",
+                    "D) APTs rely entirely on automated mass spam emails."
+                ],
+                correct: 1,
+                explanation: "APTs are characterized by stealth, customization, persistence, and continuous focus on specific high-value intelligence goals over long periods."
+            },
+            {
+                topic: "Topic 8: Advanced Persistent Threat (APT)",
+                difficulty: "Medium",
+                scenario: "An APT group uses zero-day exploits and custom encrypted C2 (Command & Control) beacons.",
+                question: "Why do standard signature-based Antivirus (AV) tools often fail to detect APT intrusions?",
+                options: [
+                    "A) AV tools only scan PDF files.",
+                    "B) APTs use previously unseen zero-day malware without existing signatures.",
+                    "C) APTs operate without using computer memory.",
+                    "D) AV tools only work when computers are turned off."
+                ],
+                correct: 1,
+                explanation: "Signature AV relies on known threat hashes. APTs develop bespoke tools and zero-day vulnerabilities that lack existing signature definitions."
+            },
+            {
+                topic: "Topic 8: Advanced Persistent Threat (APT)",
+                difficulty: "Difficult",
+                scenario: "An enterprise SOC detects APT activity moving laterally using 'Living off the Land' (LotL) techniques (e.g., PowerShell, WMI, certutil).",
+                question: "What is the primary advantage of Living off the Land techniques for an APT?",
+                options: [
+                    "A) It avoids downloading custom binary files, blending in with legitimate administrative tools to evade detection.",
+                    "B) It speeds up internet download bandwidth.",
+                    "C) It automatically encrypts local backup drives.",
+                    "D) It allows attackers to bypass physical door locks."
+                ],
+                correct: 0,
+                explanation: "Living off the Land utilizes built-in OS tools (like PowerShell or WMI) so malicious commands look like normal administrative activity."
+            },
+
+            // TOPIC 9: Malware & Types of Malware
+            {
+                topic: "Topic 9: Malware & Types of Malware",
+                difficulty: "Easy",
+                scenario: "A user downloads a free game executable. Upon running it, the game plays normally, but in the background, it silently installs a keylogger.",
+                question: "What type of malware is disguised as legitimate software?",
+                options: [
+                    "A) Worm",
+                    "B) Trojan Horse",
+                    "C) Ransomware",
+                    "D) Macro Virus"
+                ],
+                correct: 1,
+                explanation: "A Trojan Horse masquerades as useful or legitimate software to trick users into executing it."
+            },
+            {
+                topic: "Topic 9: Malware & Types of Malware",
+                difficulty: "Medium",
+                scenario: "Malware spreads rapidly across a corporate network from server to server without requiring any human interaction or file opening.",
+                question: "What type of self-replicating malware is this?",
+                options: [
+                    "A) Trojan",
+                    "B) Computer Worm",
+                    "C) Spyware",
+                    "D) Adware"
+                ],
+                correct: 1,
+                explanation: "Worms self-replicate and spread across network vulnerabilities independently without needing user interaction."
+            },
+            {
+                topic: "Topic 9: Malware & Types of Malware",
+                difficulty: "Difficult",
+                scenario: "Security researchers analyze malware that installs hooks deep inside the Operating System kernel, hiding its process IDs and files from Task Manager and security tools.",
+                question: "What class of stealth malware is operating at the OS kernel level?",
+                options: [
+                    "A) Rootkit",
+                    "B) Keylogger",
+                    "C) Adware",
+                    "D) Logic Bomb"
+                ],
+                correct: 0,
+                explanation: "Rootkits modify system functions at the OS or kernel level to conceal the presence of processes, files, or network sockets from security tools."
+            },
+
+            // TOPIC 10: Attacks Using Malware
+            {
+                topic: "Topic 10: Attacks Using Malware",
+                difficulty: "Easy",
+                scenario: "An attacker deploys keylogger software across point-of-sale cash registers at a retail store.",
+                question: "What data is the attacker primarily attempting to harvest with this malware attack?",
+                options: [
+                    "A) Keystrokes, passwords, and credit card numbers entered by operators.",
+                    "B) Monitor display refresh rates.",
+                    "C) Power grid voltage readings.",
+                    "D) Printer ink levels."
+                ],
+                correct: 0,
+                explanation: "Keyloggers capture raw keyboard input to steal login credentials, personal identification numbers, and payment details."
+            },
+            {
+                topic: "Topic 10: Attacks Using Malware",
+                difficulty: "Medium",
+                scenario: "Thousands of compromised IoT devices infected with Mirai malware simultaneously send DNS requests to a target host.",
+                question: "What attack format is created by coordinating malware across a botnet?",
+                options: [
+                    "A) Distributed Denial of Service (DDoS)",
+                    "B) SQL Injection",
+                    "C) Man-in-the-Middle (MitM)",
+                    "D) Cross-Site Scripting (XSS)"
+                ],
+                correct: 0,
+                explanation: "Botnets leverage thousands of malware-infected hosts to overwhelm target servers with coordinated DDoS traffic."
+            },
+
+            // TOPIC 11: Malware Attack Lifecycle
+            {
+                topic: "Topic 11: Malware Attack Lifecycle",
+                difficulty: "Easy",
+                scenario: "In the Cyber Kill Chain model, an attacker scans public IP ranges to identify open remote desktop ports.",
+                question: "Which initial stage of the attack lifecycle is taking place?",
+                options: [
+                    "A) Reconnaissance",
+                    "B) Weaponization",
+                    "C) Actions on Objectives",
+                    "D) Installation"
+                ],
+                correct: 0,
+                explanation: "Reconnaissance is the first stage, involving research, scanning, and gathering information on potential targets."
+            },
+            {
+                topic: "Topic 11: Malware Attack Lifecycle",
+                difficulty: "Medium",
+                scenario: "An attacker creates a malicious PDF document containing a zero-day exploit payload targeted at Adobe Reader.",
+                question: "Which Kill Chain phase couples the exploit with a deliverable payload format?",
+                options: [
+                    "A) Weaponization",
+                    "B) Reconnaissance",
+                    "C) Command & Control",
+                    "D) Exfiltration"
+                ],
+                correct: 0,
+                explanation: "Weaponization pairs an exploit with a malicious payload into a deliverable package (e.g., weaponized document)."
+            },
+
+            // TOPIC 12: Social Engineering Attacks
+            {
+                topic: "Topic 12: Social Engineering Attacks",
+                difficulty: "Easy",
+                scenario: "An employee receives an email appearing to come from the CEO demanding urgent purchase of $500 gift cards.",
+                question: "What specific targeted phishing variation is this?",
+                options: [
+                    "A) Spear Phishing / CEO Fraud (Whaling)",
+                    "B) Port Scanning",
+                    "C) Watering Hole Attack",
+                    "D) Buffer Overflow"
+                ],
+                correct: 0,
+                explanation: "Spear phishing targets specific individuals, while Whaling targets high-profile executives or impersonates authority figures."
+            },
+            {
+                topic: "Topic 12: Social Engineering Attacks",
+                difficulty: "Medium",
+                scenario: "An unknown caller phones a company helpdesk posing as an employee who forgot their multi-factor authentication token.",
+                question: "What social engineering technique relies on creating an invented scenario (pretext) to manipulate targets?",
+                options: [
+                    "A) Pretexting / Vishing",
+                    "B) Drive-by Download",
+                    "C) Man-in-the-Middle",
+                    "D) Cryptojacking"
+                ],
+                correct: 0,
+                explanation: "Pretexting involves crafting an invented scenario (pretext) over voice call (Vishing) to trick victims into surrendering access."
+            },
+
+            // TOPIC 13: Anonymity and Privacy
+            {
+                topic: "Topic 13: Anonymity and Privacy",
+                difficulty: "Easy",
+                scenario: "A privacy-conscious user routes their internet traffic through a VPN server.",
+                question: "What primary protection does a VPN provide against local Wi-Fi eavesdroppers?",
+                options: [
+                    "A) Encrypts internet traffic between the device and the VPN server.",
+                    "B) Completely cleans all viruses from the device hard drive.",
+                    "C) Doubles the physical internet connection speed.",
+                    "D) Prevents web browsers from storing local cookies."
+                ],
+                correct: 0,
+                explanation: "A VPN creates an encrypted tunnel between the host device and the VPN endpoint, hiding traffic contents from local observers."
+            },
+            {
+                topic: "Topic 13: Anonymity and Privacy",
+                difficulty: "Medium",
+                scenario: "A whistleblower uses the Tor network to submit documents safely.",
+                question: "How does Tor (The Onion Router) provide anonymity?",
+                options: [
+                    "A) By routing traffic through multiple encrypted volunteer nodes (Entry, Middle, Exit relays).",
+                    "B) By deleting web server log files automatically.",
+                    "C) By blocking physical cameras on laptops.",
+                    "D) By disabling JavaScript on target web servers."
+                ],
+                correct: 0,
+                explanation: "Tor encapsulates packets in multiple layers of encryption, peeling them off at successive relay nodes to mask sender IP addresses."
+            }
+        ];
+
+        // Unique Topics List (13 Core Modules)
+        const topicList = [
+            "Topic 1: Intro to Cyber Security",
+            "Topic 2: Networks and the Internet",
+            "Topic 3: Cyber Threat Landscape",
+            "Topic 4: Understanding Security",
+            "Topic 5: Information Security Principles (CIA)",
+            "Topic 6: Information Security Terminology",
+            "Topic 7: Who are the Attackers",
+            "Topic 8: Advanced Persistent Threat (APT)",
+            "Topic 9: Malware & Types of Malware",
+            "Topic 10: Attacks Using Malware",
+            "Topic 11: Malware Attack Lifecycle",
+            "Topic 12: Social Engineering Attacks",
+            "Topic 13: Anonymity and Privacy"
+        ];
+
+        // APP STATE
+        let activeQuiz = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let timerSecondsLeft = 0;
+        let timerInterval = null;
+        let totalElapsedSeconds = 0;
+
+        window.onload = function() {
+            renderTopicCards();
+            updateHeaderStats();
+        };
+
+        function updateHeaderStats() {
+            document.getElementById('header-stats').innerText = `${questionBank.length} Scenario Questions Loaded`;
+        }
+
+        // Render Dashboard Topic Cards
+        function renderTopicCards() {
+            const grid = document.getElementById('topics-grid');
+            grid.innerHTML = '';
+
+            topicList.forEach((topicName, idx) => {
+                const count = questionBank.filter(q => q.topic === topicName).length;
+                const card = document.createElement('div');
+                card.onclick = () => startSingleTopicExam(topicName);
+                card.className = "bg-slate-900 border border-slate-800 hover:border-teal-500/50 rounded-xl p-5 cursor-pointer transition group hover:-translate-y-1 flex flex-col justify-between";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-mono font-bold text-teal-400 bg-teal-500/10 border border-teal-500/20 px-2.5 py-1 rounded-md">
+                                Module ${idx + 1}
+                            </span>
+                            <span class="text-xs font-mono text-slate-400">${count} Qs</span>
+                        </div>
+                        <h5 class="font-bold text-white text-base mb-1 group-hover:text-teal-400 transition">${topicName}</h5>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                        <span>Easy &bull; Med &bull; Diff</span>
+                        <i class="ph-bold ph-arrow-right text-teal-400 group-hover:translate-x-1 transition"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function showScreen(screenId) {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // EXAM LAUNCH LOGIC
+        function startSingleTopicExam(topicName) {
+            document.getElementById('filter-topic').value = topicName;
+            startConfiguredExam();
+        }
+
+        function startConfiguredExam() {
+            const selectedTopic = document.getElementById('filter-topic').value;
+            const selectedDiff = document.getElementById('filter-difficulty').value;
+            const selectedCount = parseInt(document.getElementById('filter-count').value);
+            const selectedTimer = parseInt(document.getElementById('filter-timer').value);
+
+            let pool = [...questionBank];
+
+            if (selectedTopic !== 'ALL') {
+                pool = pool.filter(q => q.topic === selectedTopic);
+            }
+
+            if (selectedDiff !== 'ALL') {
+                pool = pool.filter(q => q.difficulty === selectedDiff);
+            }
+
+            if (pool.length === 0) {
+                alert("No questions matched your specific topic/difficulty filter. Try setting difficulty to 'All Levels'.");
+                return;
+            }
+
+            // Shuffle
+            pool.sort(() => 0.5 - Math.random());
+
+            activeQuiz = pool.slice(0, Math.min(selectedCount, pool.length));
+            currentIndex = 0;
+            userAnswers = {};
+            totalElapsedSeconds = 0;
+
+            // Timer Setup
+            timerSecondsLeft = selectedTimer;
+            if (timerInterval) clearInterval(timerInterval);
+
+            const timerBox = document.getElementById('timer-box');
+            const timerDisplay = document.getElementById('timer-display');
+
+            if (selectedTimer > 0) {
+                timerBox.classList.remove('hidden');
+                updateTimerDisplay();
+                timerInterval = setInterval(() => {
+                    timerSecondsLeft--;
+                    totalElapsedSeconds++;
+                    updateTimerDisplay();
+
+                    if (timerSecondsLeft <= 0) {
+                        clearInterval(timerInterval);
+                        alert("Time has expired! Submitting test automatically.");
+                        completeQuiz();
+                    }
+                }, 1000);
+            } else {
+                // Unlimited mode tracking
+                timerDisplay.innerText = "Unlimited";
+                timerInterval = setInterval(() => {
+                    totalElapsedSeconds++;
+                }, 1000);
+            }
+
+            document.getElementById('quiz-topic-badge').innerText = selectedTopic === 'ALL' ? 'Comprehensive Mixed Exam' : selectedTopic;
+            document.getElementById('quiz-difficulty-badge').innerText = selectedDiff === 'ALL' ? 'Mixed Levels' : selectedDiff;
+
+            showScreen('quiz-screen');
+            renderQuestion();
+        }
+
+        function updateTimerDisplay() {
+            if (timerSecondsLeft <= 0) return;
+            const mins = String(Math.floor(timerSecondsLeft / 60)).padStart(2, '0');
+            const secs = String(timerSecondsLeft % 60).padStart(2, '0');
+            document.getElementById('timer-display').innerText = `${mins}:${secs}`;
+
+            const icon = document.getElementById('timer-icon');
+            if (timerSecondsLeft < 60) {
+                icon.className = "ph-bold ph-warning text-rose-500 animate-bounce text-lg";
+            } else {
+                icon.className = "ph-bold ph-clock text-teal-400 text-lg";
+            }
+        }
+
+        // RENDER QUESTION
+        function renderQuestion() {
+            const q = activeQuiz[currentIndex];
+            const total = activeQuiz.length;
+
+            document.getElementById('quiz-progress-text').innerText = `Question ${currentIndex + 1} of ${total}`;
+            const pct = ((currentIndex + 1) / total) * 100;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+
+            const diffBadge = document.getElementById('quiz-difficulty-badge');
+            diffBadge.innerText = q.difficulty;
+            if (q.difficulty === 'Easy') {
+                diffBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+            } else if (q.difficulty === 'Medium') {
+                diffBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20";
+            } else {
+                diffBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20";
+            }
+
+            document.getElementById('scenario-text').innerText = q.scenario;
+            document.getElementById('question-text').innerText = q.question;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            const chosenAnswer = userAnswers[q.topic + '_' + currentIndex];
+
+            q.options.forEach((optText, idx) => {
+                const isSelected = chosenAnswer === idx;
+                const optBtn = document.createElement('div');
+                optBtn.onclick = () => selectOption(idx);
+                optBtn.className = `p-4 rounded-xl border-2 transition cursor-pointer flex items-center justify-between ${
+                    isSelected 
+                    ? 'border-teal-500 bg-teal-500/10 text-white font-medium' 
+                    : 'border-slate-800 bg-slate-950/60 hover:border-slate-700 text-slate-300'
+                }`;
+
+                optBtn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold ${
+                            isSelected ? 'border-teal-400 bg-teal-400 text-slate-950' : 'border-slate-600 text-slate-400'
+                        }">
+                            ${String.fromCharCode(65 + idx)}
+                        </div>
+                        <span class="text-sm sm:text-base">${optText}</span>
+                    </div>
+                    ${isSelected ? '<i class="ph-bold ph-check-circle text-teal-400 text-xl"></i>' : ''}
+                `;
+                container.appendChild(optBtn);
+            });
+
+            document.getElementById('prev-btn').disabled = currentIndex === 0;
+
+            const nextBtn = document.getElementById('next-btn');
+            if (currentIndex === total - 1) {
+                nextBtn.innerHTML = `Finish & Grade <i class="ph-bold ph-check text-lg"></i>`;
+                nextBtn.className = "px-7 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition flex items-center gap-2 shadow-lg shadow-emerald-500/20";
+            } else {
+                nextBtn.innerHTML = `Next Question <i class="ph-bold ph-caret-right text-lg"></i>`;
+                nextBtn.className = "px-7 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold transition flex items-center gap-2 shadow-lg shadow-teal-500/20";
+            }
+        }
+
+        function selectOption(optionIndex) {
+            const q = activeQuiz[currentIndex];
+            userAnswers[q.topic + '_' + currentIndex] = optionIndex;
+            renderQuestion();
+        }
+
+        function navigateQuestion(step) {
+            const q = activeQuiz[currentIndex];
+            if (step > 0 && userAnswers[q.topic + '_' + currentIndex] === undefined) {
+                alert("Please select an answer choice before moving forward.");
+                return;
+            }
+
+            if (currentIndex + step >= 0 && currentIndex + step < activeQuiz.length) {
+                currentIndex += step;
+                renderQuestion();
+            } else if (currentIndex + step >= activeQuiz.length) {
+                completeQuiz();
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("Exit current assessment? Unsaved progress will be lost.")) {
+                if (timerInterval) clearInterval(timerInterval);
+                showScreen('home-screen');
+            }
+        }
+
+        // COMPLETE & GRADE
+        function completeQuiz() {
+            if (timerInterval) clearInterval(timerInterval);
+
+            let score = 0;
+            activeQuiz.forEach((q, idx) => {
+                if (userAnswers[q.topic + '_' + idx] === q.correct) {
+                    score++;
+                }
+            });
+
+            const total = activeQuiz.length;
+            const accuracyPct = Math.round((score / total) * 100);
+
+            document.getElementById('final-score-val').innerText = score;
+            document.getElementById('final-total-val').innerText = `/ ${total}`;
+            document.getElementById('metric-accuracy').innerText = `${accuracyPct}%`;
+            document.getElementById('metric-correct').innerText = score;
+            document.getElementById('metric-incorrect').innerText = total - score;
+
+            const mins = String(Math.floor(totalElapsedSeconds / 60)).padStart(2, '0');
+            const secs = String(totalElapsedSeconds % 60).padStart(2, '0');
+            document.getElementById('metric-time').innerText = `${mins}:${secs}`;
+
+            const feedbackEl = document.getElementById('score-feedback-text');
+            if (accuracyPct >= 80) {
+                feedbackEl.innerText = "Mastery Level Achieved! You possess excellent critical thinking and defensive incident skills.";
+            } else if (accuracyPct >= 60) {
+                feedbackEl.innerText = "Solid Performance. Review the explanations below to refine tricky edge-case scenarios.";
+            } else {
+                feedbackEl.innerText = "Requires Further Study. Carefully read the forensic breakdowns below to build your foundational knowledge.";
+            }
+
+            // Build Detailed Review
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+
+            activeQuiz.forEach((q, idx) => {
+                const userChoice = userAnswers[q.topic + '_' + idx];
+                const isCorrect = userChoice === q.correct;
+
+                const reviewCard = document.createElement('div');
+                reviewCard.className = `p-6 rounded-2xl border ${
+                    isCorrect ? 'border-emerald-500/30 bg-emerald-950/10' : 'border-rose-500/30 bg-rose-950/10'
+                } space-y-4 print-card`;
+
+                reviewCard.innerHTML = `
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs ${
+                                isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
+                            }">
+                                Q${idx + 1}
+                            </span>
+                            <span class="text-xs font-mono text-slate-400">${q.topic} &bull; ${q.difficulty}</span>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${
+                            isCorrect ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                        }">
+                            ${isCorrect ? 'CORRECT' : 'INCORRECT'}
+                        </span>
+                    </div>
+
+                    <p class="text-sm text-slate-300 italic bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+                        "${q.scenario}"
+                    </p>
+
+                    <h5 class="font-bold text-white text-base">${q.question}</h5>
+
+                    <div class="space-y-2 text-sm">
+                        <div class="p-3 rounded-lg border ${
+                            isCorrect 
+                            ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300' 
+                            : 'border-rose-500/40 bg-rose-500/10 text-rose-300'
+                        }">
+                            <strong class="block text-xs font-mono uppercase opacity-75">Selected Answer:</strong>
+                            ${userChoice !== undefined ? q.options[userChoice] : 'No answer selected'}
+                        </div>
+
+                        ${!isCorrect ? `
+                            <div class="p-3 rounded-lg border border-teal-500/40 bg-teal-500/10 text-teal-300">
+                                <strong class="block text-xs font-mono uppercase opacity-75">Correct Answer:</strong>
+                                ${q.options[q.correct]}
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-800 text-xs text-slate-400 leading-relaxed">
+                        <strong class="text-slate-200 font-mono flex items-center gap-1 mb-1">
+                            Forensic Explanation:
+                        </strong>
+                        ${q.explanation}
+                    </div>
+                `;
+                reviewContainer.appendChild(reviewCard);
+            });
+
+            showScreen('results-screen');
+        }
+
+        function restartCurrentQuiz() {
+            startConfiguredExam();
+        }
+    </script>
+</body>
+</html>
+```
